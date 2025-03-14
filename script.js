@@ -66,6 +66,11 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('active');
         burger.classList.remove('active');
+        
+        // Reset animations when closing menu
+        navLinks.forEach(navLink => {
+            navLink.style.animation = '';
+        });
     });
 });
 
@@ -472,85 +477,59 @@ function createParticles() {
 
 // Fix for responsive layout issues
 function fixResponsiveLayout() {
+    const width = window.innerWidth;
+    
+    // Ensure all sections have proper width and padding
+    document.querySelectorAll('section').forEach(section => {
+        section.style.width = '100%';
+        section.style.maxWidth = '100%';
+        section.style.boxSizing = 'border-box';
+        section.style.overflow = 'hidden';
+    });
+    
     // Fix for interests container
     const interestsContainer = document.querySelector('.interests-container');
     if (interestsContainer) {
-        // Ensure proper width
         interestsContainer.style.width = '100%';
         interestsContainer.style.maxWidth = '1200px';
-        interestsContainer.style.boxSizing = 'border-box';
         
-        // Adjust grid layout based on screen width
-        const width = window.innerWidth;
-        if (width < 480) {
-            interestsContainer.style.gridTemplateColumns = '1fr';
-        } else if (width < 768) {
-            interestsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
-        } else if (width < 1024) {
-            interestsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
-        } else {
+        // Adjust grid columns based on screen width
+        if (width >= 1024) {
             interestsContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(180px, 1fr))';
-        }
-    }
-    
-    // Fix for section padding
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        section.style.paddingLeft = '1rem';
-        section.style.paddingRight = '1rem';
-        section.style.boxSizing = 'border-box';
-        section.style.width = '100%';
-        section.style.maxWidth = '100%';
-        section.style.overflowX = 'hidden';
-    });
-    
-    // Fix for grid containers
-    const gridContainers = document.querySelectorAll('.skills-container, .projects-grid, .education-cards');
-    gridContainers.forEach(container => {
-        container.style.width = '100%';
-        container.style.maxWidth = '1200px';
-        container.style.boxSizing = 'border-box';
-        
-        // Adjust grid layout based on screen width
-        const width = window.innerWidth;
-        if (width < 768) {
-            container.style.gridTemplateColumns = '1fr';
-        } else if (width < 1024) {
-            container.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else if (width >= 768 && width < 1024) {
+            interestsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        } else if (width >= 480 && width < 768) {
+            interestsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
         } else {
-            container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            interestsContainer.style.gridTemplateColumns = '1fr';
         }
-    });
-    
-    // Fix for about section
-    const aboutSections = document.querySelectorAll('.about-section');
-    aboutSections.forEach(section => {
-        section.style.width = '100%';
-        section.style.boxSizing = 'border-box';
-        section.style.margin = '1.5rem 0';
-    });
-    
-    // Fix for social links
-    const socialLinks = document.querySelector('.social-links');
-    if (socialLinks) {
-        socialLinks.style.width = '100%';
-        socialLinks.style.boxSizing = 'border-box';
-        socialLinks.style.display = 'flex';
-        socialLinks.style.flexWrap = 'wrap';
-        socialLinks.style.justifyContent = 'center';
-        
-        const links = socialLinks.querySelectorAll('a');
-        links.forEach(link => {
-            if (window.innerWidth < 480) {
-                link.style.flex = '1 1 100%';
-            } else {
-                link.style.flex = '1 1 250px';
-                link.style.maxWidth = '300px';
-            }
-            link.style.boxSizing = 'border-box';
-            link.style.margin = '0.5rem';
-        });
     }
+    
+    // Fix for contact section
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.style.width = '100%';
+        contactSection.style.maxWidth = '100%';
+        contactSection.style.padding = '4rem 1rem';
+    }
+    
+    // Fix for email container in contact section
+    const emailContainer = document.querySelector('.email-container');
+    if (emailContainer) {
+        if (width <= 480) {
+            emailContainer.style.maxWidth = '100%';
+            emailContainer.style.width = '100%';
+        } else {
+            emailContainer.style.maxWidth = '100%';
+            emailContainer.style.width = 'auto';
+        }
+    }
+    
+    // Fix for horizontal overflow
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.width = '100%';
+    document.body.style.maxWidth = '100%';
 }
 
 // Call the function on load and resize
