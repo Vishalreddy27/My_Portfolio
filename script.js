@@ -414,18 +414,26 @@ function equalizeSkillCategoryHeights() {
     });
 }
 
-// Theme Toggle
-function setupThemeToggle() {
-    const themeToggle = document.createElement('div');
-    themeToggle.className = 'theme-toggle';
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    navbar.appendChild(themeToggle);
+// Theme Toggle Functionality
+const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
 
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        themeToggle.querySelector('i').classList.toggle('fa-moon');
-        themeToggle.querySelector('i').classList.toggle('fa-sun');
-    });
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+    updateThemeIcon(savedTheme === 'dark');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    updateThemeIcon(isDarkMode);
+});
+
+function updateThemeIcon(isDarkMode) {
+    themeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
 }
 
 // Create floating shapes for hero section
