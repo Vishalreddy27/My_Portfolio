@@ -487,6 +487,45 @@ function fixResponsiveLayout() {
         section.style.overflow = 'hidden';
     });
     
+    // Fix for skills container and skill items
+    const skillsContainer = document.querySelector('.skills-container');
+    if (skillsContainer) {
+        skillsContainer.style.width = '100%';
+        skillsContainer.style.maxWidth = '1200px';
+        
+        // Adjust grid columns based on screen width
+        if (width >= 1024) {
+            skillsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        } else if (width >= 768 && width < 1024) {
+            skillsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else {
+            skillsContainer.style.gridTemplateColumns = '1fr';
+        }
+        
+        // Ensure skill items maintain grid layout
+        const skillItems = document.querySelectorAll('.skill-items');
+        skillItems.forEach(item => {
+            item.style.display = 'grid';
+            item.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            item.style.gap = width < 480 ? '0.8rem' : '1rem';
+            item.style.width = '100%';
+        });
+        
+        // Ensure category icons maintain proper styling
+        const categoryIcons = document.querySelectorAll('.category-icon');
+        categoryIcons.forEach(icon => {
+            icon.style.width = width < 480 ? '45px' : width < 768 ? '50px' : '60px';
+            icon.style.height = width < 480 ? '45px' : width < 768 ? '50px' : '60px';
+            icon.style.margin = '0 auto 1.5rem';
+            
+            // Adjust icon font size
+            const iconElement = icon.querySelector('i');
+            if (iconElement) {
+                iconElement.style.fontSize = width < 480 ? '1.3rem' : width < 768 ? '1.5rem' : '1.8rem';
+            }
+        });
+    }
+    
     // Fix for interests container
     const interestsContainer = document.querySelector('.interests-container');
     if (interestsContainer) {

@@ -1113,6 +1113,26 @@ html {
     flex: 1;
 }
 
+.skill-items span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skill-items span:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* Skill logo styling */
 .skill-logo {
     display: flex;
@@ -2769,4 +2789,259 @@ html, body {
 
 .burger.toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
-} 
+}
+
+/* Ensure matrix layout is maintained across all screen sizes */
+@media screen and (max-width: 1200px) {
+    .skill-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .skill-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+    
+    .skill-items span {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.85rem;
+        min-height: 2.2rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .skill-items {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.6rem;
+    }
+    
+    .skill-items span {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.8rem;
+        min-height: 2rem;
+    }
+}
+
+/* Section Title Styles */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3rem;
+    position: relative;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+/* Web Development & Data Science Section Titles */
+#skills .section-title::after {
+    background: linear-gradient(90deg, #4cc9f0, #4361ee);
+}
+
+/* Responsive styles for section titles */
+@media screen and (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title::after {
+        width: 60px;
+        height: 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-title::after {
+        width: 50px;
+    }
+}
+
+/* Skill Category Specific Styles */
+.skill-category.web-dev h3 {
+    color: #4cc9f0;
+}
+
+.skill-category.web-dev h3::after {
+    background: linear-gradient(90deg, #4cc9f0, #4361ee);
+}
+
+.skill-category.data-science h3 {
+    color: #f72585;
+}
+
+.skill-category.data-science h3::after {
+    background: linear-gradient(90deg, #f72585, #b5179e);
+}
+
+/* Add colored icons to match the image */
+.skill-category.web-dev::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: #4cc9f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
+}
+
+.skill-category.data-science::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: #f72585;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+}
+
+/* Category Icon Styles */
+.category-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.skill-category.web-dev .category-icon {
+    background: linear-gradient(135deg, #4cc9f0, #4361ee);
+    box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
+}
+
+.skill-category.data-science .category-icon {
+    background: linear-gradient(135deg, #f72585, #b5179e);
+    box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+}
+
+.category-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+/* Remove the ::before pseudo-elements since we're using actual icon divs */
+.skill-category.web-dev::before,
+.skill-category.data-science::before {
+    content: none;
+}
+
+/* Update skill category position to relative for proper icon positioning */
+.skill-category {
+    position: relative;
+    padding-top: 2rem;
+}
+
+/* Responsive styles for category icons */
+@media screen and (max-width: 768px) {
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+    }
+    
+    .category-icon i {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .category-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .category-icon i {
+        font-size: 1.3rem;
+    }
+}
+
+/* Additional Skill Category Icon Styles */
+.skill-category.programming .category-icon {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.skill-category.core-cs .category-icon {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+}
+
+.skill-category.soft-skills .category-icon {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+/* Category Icon Text Styles */
+.skill-category.programming h3 {
+    color: #3498db;
+}
+
+.skill-category.core-cs h3 {
+    color: #9b59b6;
+}
+
+.skill-category.soft-skills h3 {
+    color: #2ecc71;
+}
+
+/* Category Icon Underline Styles */
+.skill-category.programming h3::after {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.skill-category.core-cs h3::after {
+    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+.skill-category.soft-skills h3::after {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+/* Add hover effect for all category icons */
+.skill-category:hover .category-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.category-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
